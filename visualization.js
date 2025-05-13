@@ -3,25 +3,25 @@ const margin = { top: 40, right: 40, bottom: 60, left: 70 };
 const width = 960 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
-// Colors for different exams
-const colors = {
-  "Midterm 1": "#1f77b4",
-  "Midterm 2": "#ff7f0e",
-  Final: "#2ca02c",
+// Colors for different students
+const studentColors = {
+  S01: "#1f77b4", // blue
+  S02: "#ff7f0e", // orange
+  S03: "#2ca02c", // green
+  S04: "#d62728", // red
+  S05: "#9467bd", // purple
+  S06: "#8c564b", // brown
+  S07: "#e377c2", // pink
+  S08: "#7f7f7f", // gray
+  S09: "#bcbd22", // olive
+  S10: "#17becf", // cyan
 };
 
-// Shape generators for different students
-const studentShapes = {
-  S01: d3.symbolCircle,
-  S02: d3.symbolSquare,
-  S03: d3.symbolTriangle,
-  S04: d3.symbolDiamond,
-  S05: d3.symbolStar,
-  S06: d3.symbolCross,
-  S07: d3.symbolWye,
-  S08: d3.symbolCircle, // Reuse shapes with different colors
-  S09: d3.symbolSquare,
-  S10: d3.symbolTriangle,
+// Shapes for different exams
+const examShapes = {
+  "Midterm 1": d3.symbolCircle,
+  "Midterm 2": d3.symbolSquare,
+  Final: d3.symbolTriangle,
 };
 
 // Units for each measure
@@ -268,16 +268,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("class", "legend-item student-legend-item");
 
       legendItem
-        .append("svg")
-        .attr("width", 20)
-        .attr("height", 20)
-        .append("path")
-        .attr("transform", "translate(10, 10)")
-        .attr(
-          "d",
-          symbolGenerator.type(studentShapes[studentId] || d3.symbolCircle)
-        )
-        .style("fill", "#555");
+        .append("div")
+        .attr("class", "legend-color")
+        .style("background-color", studentColors[studentId]);
 
       legendItem.append("div").text(studentId);
     });
@@ -353,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "transform",
         (d) => `translate(${xScale(d.currentValue)}, ${yScale(d.grade)})`
       )
-      .attr("fill", (d) => colors[d.exam_type]);
+      .attr("fill", (d) => studentColors[d.student_id]);
 
     // Enter new points
     points
@@ -361,13 +354,13 @@ document.addEventListener("DOMContentLoaded", function () {
       .append("path")
       .attr("class", "data-point")
       .attr("d", (d) =>
-        symbolGenerator.type(studentShapes[d.student_id] || d3.symbolCircle)()
+        symbolGenerator.type(examShapes[d.exam_type] || d3.symbolCircle)()
       )
       .attr(
         "transform",
         (d) => `translate(${xScale(d.currentValue)}, ${yScale(d.grade)})`
       )
-      .attr("fill", (d) => colors[d.exam_type])
+      .attr("fill", (d) => studentColors[d.student_id])
       .style("opacity", 0)
       .on("mouseover", function (event, d) {
         tooltip.transition().duration(200).style("opacity", 0.9);
