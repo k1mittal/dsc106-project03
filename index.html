@@ -1,13 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DSC 106 Project 03</title>
+    <title>Exam Stress Analysis</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="global.css" />
-    <script src="map.js" type="module"></script>
+    <script src="visualization.js"></script>
   </head>
   <body>
-    <h1>DSC106 Project 03</h1>
+    <div class="container">
+      <h1>Exam Performance vs. Physiological Measures</h1>
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="measure-select">Measure:</label>
+          <select id="measure-select">
+            <option value="HR">Heart Rate</option>
+            <option value="EDA">Electrodermal Activity</option>
+            <option value="TEMP">Temperature</option>
+            <option value="BVP">Blood Volume Pulse</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="stat-select">Statistic:</label>
+          <select id="stat-select">
+            <option value="avg">Average</option>
+            <option value="median">Median</option>
+            <option value="max">Maximum</option>
+            <option value="min">Minimum</option>
+            <option value="q1">1st Quartile</option>
+            <option value="q3">3rd Quartile</option>
+            <option value="range">Range</option>
+            <option value="iqr">IQR</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="legends-container">
+        <div class="legend">
+          <h3>Exams</h3>
+          <div class="legend-content">
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #1f77b4"></div>
+              <div>Midterm 1</div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #ff7f0e"></div>
+              <div>Midterm 2</div>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #2ca02c"></div>
+              <div>Final</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="visualization-container">
+        <div id="chart-container">
+          <div class="loading">Loading data...</div>
+          <svg id="chart"></svg>
+        </div>
+
+        <div id="student-legend-container">
+          <h3>Students</h3>
+          <div id="student-legend"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
