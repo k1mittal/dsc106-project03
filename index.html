@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -70,5 +70,139 @@
         </div>
       </div>
     </div>
+    <section>
+      <h2>Rationale for Design Decisions</h2>
+
+      <p><strong>Choice of Visual Encoding</strong></p>
+      <p>
+        We wanted to reveal any relationship between physiological measures and
+        exam performance, so plotting each student’s score against their EDA (or
+        whichever metric/statistic is selected) made correlation patterns
+        immediately visible.
+      </p>
+      <ul>
+        <li>
+          <strong>Color for Student Identity:</strong> Unique hues for each of
+          the 10 students let viewers trace one student’s performance across
+          Midterm 1, Midterm 2, and Final.
+        </li>
+        <li>
+          <strong>Shape for Exam Type:</strong> Circles, squares, and triangles
+          encode Midterm 1, Midterm 2, and Final respectively: so differences by
+          exam are instantly clear.
+        </li>
+        <li>
+          <strong>Opacity &amp; Size:</strong> Moderately opaque, uniform
+          markers prevent overlap from hiding data yet avoid visual dominance by
+          any single point.
+        </li>
+        <li>
+          <strong>Dropdown Controls:</strong> “Measure” (EDA, Heart Rate, etc.)
+          and “Statistic” (Average, Max, Min) selectors allow on-the-fly
+          comparisons without reloading.
+        </li>
+        <li>
+          <strong>Tooltips &amp; Legend Placement:</strong> Hover tooltips
+          reveal student ID, exact values, and scores; the legend on the right
+          stays out of the plot area but remains accessible.
+        </li>
+      </ul>
+
+      <p><strong>Alternatives Considered</strong></p>
+      <ul>
+        <li>
+          Small multiples (one chart per exam): discarded because cross-exam
+          comparisons become less immediate.
+        </li>
+        <li>
+          Using color alone for both student and exam: rejected to avoid
+          confusion and improve accessibility.
+        </li>
+        <li>
+          Brushing &amp; linked detail panel: scoped as a stretch goal, deferred
+          to keep the interface lean.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Overview of Development Process</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ketan Mittal</td>
+            <td>
+              Design EDA, facilitating the work distribution and being in charge
+              of video compilation and topic. Created the github and github
+              page. Made sure everyone submitted their piece on time, for both
+              checkpoint and final.
+            </td>
+            <td>6 hours</td>
+          </tr>
+          <tr>
+            <td>Anirudh Annabathulla</td>
+            <td>Design EDA, Dataset foundation, D3 implementation, dropdown logic, tooltips</td>
+            <td>7 hours</td>
+          </tr>
+          <tr>
+            <td>Kaii Bijlani</td>
+            <td>
+              Design EDA, other topic visalizations and component analysis.
+            </td>
+            <td>3.5 hours</td>
+          </tr>
+          <tr>
+            <td>Ganesh Kummarappan</td>
+            <td>
+              Design EDA, recording interative visualization and other analysis
+              of variables.
+            </td>
+            <td>3.5 hours</td>
+          </tr>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td></td>
+            <td><strong>20 hours</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Data Wrangling (~6 hrs)</strong></p>
+      <p>
+        Parsed raw physiological data, merged with exam scores, computed
+        per-student statistics, and visualized variable relationships through
+        EDA.
+      </p>
+
+      <p><strong>Visualization &amp; Interaction (~10 hrs)</strong></p>
+      <p>
+        Scaffolded the scatter plot with D3’s scales and axes, added shape
+        encoding, hooked up dropdown listeners for dynamic updates, and
+        optimized DOM queries with JS for smooth transitions.
+      </p>
+
+      <p><strong>Design, Testing &amp; Polishing (~4 hrs)</strong></p>
+      <p>
+        Finalized a color friendly palette and consistent shapes, conducted
+        responsive checks, then wrote and integrated this documentation into a
+        github page.
+      </p>
+
+      <p><strong>Time-Sink Takeaways</strong></p>
+      <p>
+        The interaction logic—handling, oncurrent dropdown changes and
+        animations consumed roughly half of our hours. Coordinating data keys
+        and chart bindings added a few extra hours of back-and-forth
+        communication.
+      </p>
+    </section>
   </body>
 </html>
